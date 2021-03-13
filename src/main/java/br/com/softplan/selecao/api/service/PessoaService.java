@@ -1,10 +1,11 @@
 package br.com.softplan.selecao.api.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.softplan.selecao.api.dto.PessoaCadastroDTO;
@@ -19,17 +20,19 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 
-	public PessoaRetornoDTO find(Integer id) throws ResourceNotFoundException {
+	public PessoaRetornoDTO findById(Integer id) throws ResourceNotFoundException {
 		return this.pessoaRepository
 			.findById(id)
 			.map(this::toDTO)
 			.orElseThrow(ResourceNotFoundException::new);
 	}
 
-	public Page<PessoaRetornoDTO> findAll(Pageable pageable) {
+	public List<PessoaRetornoDTO> findAll() {
 		return this.pessoaRepository
-			.findAll(pageable)
-			.map(this::toDTO);
+			.findAll()
+			.stream()
+			.map(this::toDTO)
+			.collect(Collectors.toList());
 	}
 
 	@Transactional
