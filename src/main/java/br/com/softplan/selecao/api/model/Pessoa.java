@@ -7,10 +7,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.annotation.CreatedDate;
@@ -20,6 +22,7 @@ import org.springframework.lang.Nullable;
 @Entity
 public class Pessoa {
 	@Id
+	@GeneratedValue
 	private Integer id;
 	
 	@NotBlank
@@ -33,6 +36,7 @@ public class Pessoa {
 	@Nullable
 	private String email;
 
+	@Past
 	@NotNull
 	private LocalDate dataNascimento;
 	
