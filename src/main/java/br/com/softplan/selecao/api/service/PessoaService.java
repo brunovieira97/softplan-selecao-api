@@ -11,7 +11,6 @@ import br.com.softplan.selecao.api.dto.PessoaCadastroDTO;
 import br.com.softplan.selecao.api.dto.PessoaRetornoDTO;
 import br.com.softplan.selecao.api.exception.ResourceNotFoundException;
 import br.com.softplan.selecao.api.model.Pessoa;
-import br.com.softplan.selecao.api.model.Sexo;
 import br.com.softplan.selecao.api.repository.PessoaRepository;
 
 @Service
@@ -34,10 +33,10 @@ public class PessoaService {
 	}
 
 	@Transactional
-	public PessoaRetornoDTO create(PessoaCadastroDTO dto) throws ResourceNotFoundException {
-		Pessoa pessoa = this.pessoaRepository.save(this.toEntity(dto));
-
-		return this.find(pessoa.getId());
+	public Integer create(PessoaCadastroDTO dto) throws ResourceNotFoundException {
+		return this.pessoaRepository
+			.save(this.toEntity(dto))
+			.getId();
 	}
 
 	@Transactional
@@ -64,7 +63,7 @@ public class PessoaService {
 
 		dto.setId(pessoa.getId());
 		dto.setNome(pessoa.getNome());
-		dto.setSexo(pessoa.getSexo().getValor());
+		dto.setSexo(pessoa.getSexo());
 		dto.setEmail(pessoa.getEmail());
 		dto.setDataNascimento(pessoa.getDataNascimento());
 		dto.setNaturalidade(pessoa.getNaturalidade());
@@ -84,7 +83,7 @@ public class PessoaService {
 
 	private Pessoa updateFromDTO(Pessoa pessoa, PessoaCadastroDTO dto) {
 		pessoa.setNome(dto.getNome());
-		pessoa.setSexo(Sexo.valueOf(dto.getSexo()));
+		pessoa.setSexo(dto.getSexo());
 		pessoa.setEmail(dto.getEmail());
 		pessoa.setDataNascimento(dto.getDataNascimento());
 		pessoa.setNaturalidade(dto.getNaturalidade());
