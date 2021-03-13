@@ -42,7 +42,9 @@ public class PessoaController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public PessoaRetornoDTO create(@RequestBody @Valid PessoaCadastroDTO dto) throws ResourceNotFoundException {
-		return this.pessoaService.create(dto);
+		Integer id = this.pessoaService.create(dto);
+
+		return this.pessoaService.find(id);
 	}
 
 	@PutMapping("/{id}")
