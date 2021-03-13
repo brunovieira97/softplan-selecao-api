@@ -6,6 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.lang.Nullable;
@@ -16,6 +17,7 @@ public class PessoaCadastroDTO {
 	private String nome;
 
 	@Nullable
+	@Size(min = 1, max = 1)
 	private String sexo;
 	
 	@Email
