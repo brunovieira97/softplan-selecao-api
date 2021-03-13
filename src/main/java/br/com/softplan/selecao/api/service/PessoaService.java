@@ -1,6 +1,6 @@
 package br.com.softplan.selecao.api.service;
 
-import java.util.Optional;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.softplan.selecao.api.dto.PessoaCadastroDTO;
 import br.com.softplan.selecao.api.dto.PessoaRetornoDTO;
+import br.com.softplan.selecao.api.exception.ResourceNotFoundException;
 import br.com.softplan.selecao.api.model.Pessoa;
 import br.com.softplan.selecao.api.model.Sexo;
 import br.com.softplan.selecao.api.repository.PessoaRepository;
@@ -19,43 +20,41 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 
-	public Optional<PessoaRetornoDTO> find(Integer id) {
-		return this.pessoaRepository.findById(id).map(this::toDTO);
+	public PessoaRetornoDTO find(Integer id) throws ResourceNotFoundException {
+		return this.pessoaRepository
+			.findById(id)
+			.map(this::toDTO)
+			.orElseThrow(ResourceNotFoundException::new);
 	}
 
 	public Page<PessoaRetornoDTO> findAll(Pageable pageable) {
-		Page<Pessoa> page = this.pessoaRepository.findAll(pageable);
-		Page<PessoaRetornoDTO> pageDTO = page.map(this::toDTO);
-
-		return pageDTO;
+		return this.pessoaRepository
+			.findAll(pageable)
+			.map(this::toDTO);
 	}
 
-	public PessoaRetornoDTO create(PessoaCadastroDTO dto) throws Exception {
+	@Transactional
+	public PessoaRetornoDTO create(PessoaCadastroDTO dto) throws ResourceNotFoundException {
 		Pessoa pessoa = this.pessoaRepository.save(this.toEntity(dto));
 
-		return this
-			.find(pessoa.getId())
-			.orElseThrow(() -> new Exception("Erro ao salvar Pessoa"));
+		return this.find(pessoa.getId());
 	}
 
-	public PessoaRetornoDTO update(Integer id, PessoaCadastroDTO dto) throws Exception {
+	@Transactional
+	public void update(Integer id, PessoaCadastroDTO dto) throws ResourceNotFoundException {
 		Pessoa pessoa = this.pessoaRepository
 			.findById(id)
-			.orElseThrow(() -> new Exception("Pessoa não encontrada"));
+			.orElseThrow(ResourceNotFoundException::new);
 
 		pessoa = this.updateFromDTO(pessoa, dto);
 
 		this.pessoaRepository.save(pessoa);
-
-		return this
-			.find(pessoa.getId())
-			.orElseThrow(() -> new Exception("Erro ao salvar Pessoa"));
 	}
 
-	public void delete(Integer id) throws Exception {
+	public void delete(Integer id) throws ResourceNotFoundException {
 		Pessoa pessoa = this.pessoaRepository
 			.findById(id)
-			.orElseThrow(() -> new Exception("Pessoa não encontrada"));
+			.orElseThrow(ResourceNotFoundException::new);
 
 		this.pessoaRepository.delete(pessoa);
 	}
