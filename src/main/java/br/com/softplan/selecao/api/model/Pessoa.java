@@ -5,18 +5,17 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.lang.Nullable;
 
 @Entity
@@ -29,8 +28,8 @@ public class Pessoa {
 	private String nome;
 	
 	@Nullable
-	@Enumerated(EnumType.STRING)
-	private Sexo sexo;
+	@Size(min = 1, max = 1)
+	private String sexo;
 	
 	@Email
 	@Nullable
@@ -51,16 +50,16 @@ public class Pessoa {
 	@Column(unique = true)
 	private String cpf;
 
-	@CreatedDate
+	@CreationTimestamp
 	private LocalDateTime dataCriacao;
 
-	@LastModifiedDate
+	@UpdateTimestamp
 	private LocalDateTime dataAtualizacao;
 	
 	public Pessoa() {
 	}
 	
-	public Pessoa(Integer id, String nome, Sexo sexo, String email, LocalDate dataNascimento, String naturalidade,
+	public Pessoa(Integer id, String nome, String sexo, String email, LocalDate dataNascimento, String naturalidade,
 			String nacionalidade, String cpf) {
 		this.id = id;
 		this.nome = nome;
@@ -84,11 +83,11 @@ public class Pessoa {
 		this.nome = nome;
 	}
 
-	public Sexo getSexo() {
+	public String getSexo() {
 		return this.sexo;
 	}
 
-	public void setSexo(Sexo sexo) {
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
 
