@@ -1,10 +1,10 @@
 package br.com.softplan.selecao.api.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,12 +31,12 @@ public class PessoaController {
 	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public PessoaRetornoDTO find(@PathVariable Integer id) throws ResourceNotFoundException {
-		return this.pessoaService.find(id);
+		return this.pessoaService.findById(id);
 	}
 
 	@GetMapping
-	public Page<PessoaRetornoDTO> findAll(Pageable pageable) {
-		return pessoaService.findAll(pageable);
+	public List<PessoaRetornoDTO> findAll() {
+		return pessoaService.findAll();
 	}
 
 	@PostMapping
@@ -44,7 +44,7 @@ public class PessoaController {
 	public PessoaRetornoDTO create(@RequestBody @Valid PessoaCadastroDTO dto) throws ResourceNotFoundException {
 		Integer id = this.pessoaService.create(dto);
 
-		return this.pessoaService.find(id);
+		return this.pessoaService.findById(id);
 	}
 
 	@PutMapping("/{id}")
