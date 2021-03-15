@@ -5,7 +5,7 @@ API do projeto de seleção para Desenvolvedor Java na Softplan.
 ## Requisitos
 
  - [x] Endpoints para manutenção (CRUD) de Pessoa
- - [ ] Front-End para interagir com a API
+ - [x] Front-End para interagir com a API
  - [ ] Autenticação **basic**
  - [ ] Disponibilizar imagem Docker
 	 - [ ] Publicar no DockerHub
