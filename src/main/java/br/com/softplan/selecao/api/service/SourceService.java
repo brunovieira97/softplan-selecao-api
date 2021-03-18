@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public class SourceService {
 	
 	public String getProjectUrl() {
-		return "<GitHub URL here>";
+		return "https://github.com/brunovieira97/softplan-selecao-api";
 	}
 }
