@@ -1,4 +1,4 @@
-package br.com.softplan.selecao.api.service;
+package br.com.softplan.selecao.api.service.v1;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,8 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.softplan.selecao.api.dto.PessoaCadastroDTO;
-import br.com.softplan.selecao.api.dto.PessoaRetornoDTO;
+import br.com.softplan.selecao.api.dto.v1.PessoaCadastroDTO;
+import br.com.softplan.selecao.api.dto.v1.PessoaRetornoDTO;
 import br.com.softplan.selecao.api.exception.ResourceNotFoundException;
 import br.com.softplan.selecao.api.model.Pessoa;
 import br.com.softplan.selecao.api.repository.PessoaRepository;
