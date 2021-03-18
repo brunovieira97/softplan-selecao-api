@@ -9,7 +9,7 @@ Conforme as orientações, foi realizada a publicação da imagem Docker no Dock
 Basta criar um container baseado na imagem obtida do DockerHub:
 
 ```
-docker run -d -p8080:8080 --name ui brunovieira97/softplan-selecao-api
+docker run -d -p8080:8080 --name api brunovieira97/softplan-selecao-api
 ```
 
 
