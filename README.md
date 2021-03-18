@@ -6,10 +6,10 @@ API do projeto de seleção para Desenvolvedor Java na Softplan.
 
  - [x] Endpoints para manutenção (CRUD) de Pessoa
  - [x] Front-End para interagir com a API
- - [ ] Autenticação **basic**
- - [ ] Disponibilizar imagem Docker
-	 - [ ] Publicar no DockerHub
- - [ ] Endpoint `/source` para retornar a URL do repositório
+ - [x] Autenticação **basic**
+ - [x] Disponibilizar imagem Docker
+	 - [x] Publicar no DockerHub
+ - [x] Endpoint `/source` para retornar a URL do repositório
 
 ### Extras
 
