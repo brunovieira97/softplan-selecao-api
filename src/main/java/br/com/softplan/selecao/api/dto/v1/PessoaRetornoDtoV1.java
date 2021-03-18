@@ -1,9 +1,9 @@
-package br.com.softplan.selecao.api.dto;
+package br.com.softplan.selecao.api.dto.v1;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class PessoaRetornoDTO {
+public class PessoaRetornoDtoV1 {
 	
 	private Integer id;
 	private String nome;
@@ -16,10 +16,10 @@ public class PessoaRetornoDTO {
 	private LocalDateTime dataCriacao;
 	private LocalDateTime dataAtualizacao;
 	
-	public PessoaRetornoDTO() {
+	public PessoaRetornoDtoV1() {
 	}
 	
-	public PessoaRetornoDTO(Integer id, String nome, String sexo, String email, LocalDate dataNascimento,
+	public PessoaRetornoDtoV1(Integer id, String nome, String sexo, String email, LocalDate dataNascimento,
 			String naturalidade, String nacionalidade, String cpf, LocalDateTime dataCriacao,
 			LocalDateTime dataAtualizacao) {
 		this.id = id;

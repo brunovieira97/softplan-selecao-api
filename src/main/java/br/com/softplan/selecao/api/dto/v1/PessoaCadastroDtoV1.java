@@ -1,4 +1,4 @@
-package br.com.softplan.selecao.api.dto;
+package br.com.softplan.selecao.api.dto.v1;
 
 import java.time.LocalDate;
 
@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.lang.Nullable;
 
-public class PessoaCadastroDTO {
+public class PessoaCadastroDtoV1 {
 
 	@NotBlank
 	private String nome;
@@ -37,7 +37,7 @@ public class PessoaCadastroDTO {
 	@NotBlank
 	private String cpf;
 
-	public PessoaCadastroDTO(String nome, String sexo, String email, LocalDate dataNascimento, String naturalidade,
+	public PessoaCadastroDtoV1(String nome, String sexo, String email, LocalDate dataNascimento, String naturalidade,
 			String nacionalidade, String cpf) {
 		this.nome = nome;
 		this.sexo = sexo;
