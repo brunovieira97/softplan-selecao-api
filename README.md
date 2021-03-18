@@ -4,6 +4,15 @@ Este repositório contém o código da API REST (back-end) do desafio.
 
 Conforme as orientações, foi realizada a publicação da imagem Docker no DockerHub, acessível através [deste link](https://hub.docker.com/r/brunovieira97/softplan-selecao-api).
 
+## Executando
+
+Basta criar um container baseado na imagem obtida do DockerHub:
+
+```
+docker run -d -p8080:8080 --name ui brunovieira97/softplan-selecao-api
+```
+
+
 ## Requisitos
 
  - [x] Endpoints para manutenção (CRUD) de Pessoa
