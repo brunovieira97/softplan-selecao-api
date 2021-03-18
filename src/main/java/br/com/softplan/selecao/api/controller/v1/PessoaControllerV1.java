@@ -1,4 +1,4 @@
-package br.com.softplan.selecao.api.controller;
+package br.com.softplan.selecao.api.controller.v1;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.softplan.selecao.api.dto.PessoaCadastroDTO;
-import br.com.softplan.selecao.api.dto.PessoaRetornoDTO;
+import br.com.softplan.selecao.api.dto.v1.PessoaCadastroDtoV1;
+import br.com.softplan.selecao.api.dto.v1.PessoaRetornoDtoV1;
 import br.com.softplan.selecao.api.exception.ResourceNotFoundException;
-import br.com.softplan.selecao.api.service.PessoaService;
+import br.com.softplan.selecao.api.service.v1.PessoaServiceV1;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -27,16 +26,16 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
-@RequestMapping("/pessoas")
+@RequestMapping("/v1/pessoas")
 @ApiResponses({
 	@ApiResponse(responseCode = "400", description = "Bad Request", content = @Content()),
 	@ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content()),
 	@ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content())
 })
-public class PessoaController {
+public class PessoaControllerV1 {
 
 	@Autowired
-	private PessoaService pessoaService;
+	private PessoaServiceV1 pessoaService;
 	
 	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
@@ -48,7 +47,7 @@ public class PessoaController {
 		@ApiResponse(responseCode = "200", description = "Sucesso"),
 		@ApiResponse(responseCode = "204", description = "Pessoa com este ID não existe", content = @Content())
 	})
-	public PessoaRetornoDTO find(
+	public PessoaRetornoDtoV1 find(
 		@Parameter(name = "id", description = "ID da Pessoa a ser retornada.", required = true)
 		@PathVariable
 			Integer id
@@ -64,7 +63,7 @@ public class PessoaController {
 	@ApiResponses({
 		@ApiResponse(responseCode = "200", description = "Sucesso"),
 	})
-	public List<PessoaRetornoDTO> findAll() {
+	public List<PessoaRetornoDtoV1> findAll() {
 		return pessoaService.findAll();
 	}
 
@@ -77,14 +76,14 @@ public class PessoaController {
 	@ApiResponses({
 		@ApiResponse(responseCode = "201", description = "Pessoa criada"),
 	})
-	public PessoaRetornoDTO create(
+	public PessoaRetornoDtoV1 create(
 		@io.swagger.v3.oas.annotations.parameters.RequestBody(
 			description = "DTO que representa a Pessoa a ser persistida."
 		)
 		@Parameter(required = true)
 		@RequestBody
 		@Valid
-			PessoaCadastroDTO dto
+			PessoaCadastroDtoV1 dto
 	) throws ResourceNotFoundException {
 		Integer id = this.pessoaService.create(dto);
 
@@ -111,26 +110,10 @@ public class PessoaController {
 		@Parameter(name = "dto", required = true)
 		@RequestBody
 		@Valid
-			PessoaCadastroDTO dto
+			PessoaCadastroDtoV1 dto
 	) throws ResourceNotFoundException {
 		this.pessoaService.update(id, dto);
 	}
 
-	@DeleteMapping("/{id}")
-	@ResponseStatus(HttpStatus.OK)
-	@Operation(
-		summary = "Excluir pessoa",
-		description = "Excluir um registro de Pessoa existente."
-	)
-	@ApiResponses({
-		@ApiResponse(responseCode = "200", description = "Sucesso"),
-		@ApiResponse(responseCode = "204", description = "Pessoa com este ID não existe", content = @Content())
-	})
-	public void delete(
-		@Parameter(name = "id", description = "ID da Pessoa a ser excluída.", required = true)
-		@PathVariable
-			Integer id
-	) throws ResourceNotFoundException {
-		this.pessoaService.delete(id);
-	}
+	
 }

@@ -1,28 +1,44 @@
 package br.com.softplan.selecao.api.dto.v1;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-public class PessoaRetornoDTO {
-	
-	private Integer id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.lang.Nullable;
+
+public class PessoaCadastroDtoV1 {
+
+	@NotBlank
 	private String nome;
+
+	@Nullable
+	@Size(min = 1, max = 1)
 	private String sexo;
+	
+	@Email
 	private String email;
+	
+	@Past
+	@NotNull
 	private LocalDate dataNascimento;
+	
+	@Nullable
 	private String naturalidade;
+
+	@Nullable
 	private String nacionalidade;
+
+	@CPF
+	@NotBlank
 	private String cpf;
-	private LocalDateTime dataCriacao;
-	private LocalDateTime dataAtualizacao;
-	
-	public PessoaRetornoDTO() {
-	}
-	
-	public PessoaRetornoDTO(Integer id, String nome, String sexo, String email, LocalDate dataNascimento,
-			String naturalidade, String nacionalidade, String cpf, LocalDateTime dataCriacao,
-			LocalDateTime dataAtualizacao) {
-		this.id = id;
+
+	public PessoaCadastroDtoV1(String nome, String sexo, String email, LocalDate dataNascimento, String naturalidade,
+			String nacionalidade, String cpf) {
 		this.nome = nome;
 		this.sexo = sexo;
 		this.email = email;
@@ -30,16 +46,6 @@ public class PessoaRetornoDTO {
 		this.naturalidade = naturalidade;
 		this.nacionalidade = nacionalidade;
 		this.cpf = cpf;
-		this.dataCriacao = dataCriacao;
-		this.dataAtualizacao = dataAtualizacao;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setId(Integer id) {
-		this.id = id;
 	}
 	
 	public String getNome() {
@@ -97,20 +103,5 @@ public class PessoaRetornoDTO {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
-	public LocalDateTime getDataCriacao() {
-		return dataCriacao;
-	}
 	
-	public void setDataCriacao(LocalDateTime dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
-	
-	public LocalDateTime getDataAtualizacao() {
-		return dataAtualizacao;
-	}
-	
-	public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
-		this.dataAtualizacao = dataAtualizacao;
-	}
 }

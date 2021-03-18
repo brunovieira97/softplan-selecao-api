@@ -8,26 +8,26 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.softplan.selecao.api.dto.v1.PessoaCadastroDTO;
-import br.com.softplan.selecao.api.dto.v1.PessoaRetornoDTO;
+import br.com.softplan.selecao.api.dto.v1.PessoaCadastroDtoV1;
+import br.com.softplan.selecao.api.dto.v1.PessoaRetornoDtoV1;
 import br.com.softplan.selecao.api.exception.ResourceNotFoundException;
 import br.com.softplan.selecao.api.model.Pessoa;
 import br.com.softplan.selecao.api.repository.PessoaRepository;
 
 @Service
-public class PessoaService {
+public class PessoaServiceV1 {
 	
 	@Autowired
 	private PessoaRepository pessoaRepository;
 
-	public PessoaRetornoDTO findById(Integer id) throws ResourceNotFoundException {
+	public PessoaRetornoDtoV1 findById(Integer id) throws ResourceNotFoundException {
 		return this.pessoaRepository
 			.findById(id)
 			.map(this::toDTO)
 			.orElseThrow(ResourceNotFoundException::new);
 	}
 
-	public List<PessoaRetornoDTO> findAll() {
+	public List<PessoaRetornoDtoV1> findAll() {
 		return this.pessoaRepository
 			.findAll()
 			.stream()
@@ -36,14 +36,14 @@ public class PessoaService {
 	}
 
 	@Transactional
-	public Integer create(PessoaCadastroDTO dto) throws ResourceNotFoundException {
+	public Integer create(PessoaCadastroDtoV1 dto) throws ResourceNotFoundException {
 		return this.pessoaRepository
 			.save(this.toEntity(dto))
 			.getId();
 	}
 
 	@Transactional
-	public void update(Integer id, PessoaCadastroDTO dto) throws ResourceNotFoundException {
+	public void update(Integer id, PessoaCadastroDtoV1 dto) throws ResourceNotFoundException {
 		Pessoa pessoa = this.pessoaRepository
 			.findById(id)
 			.orElseThrow(ResourceNotFoundException::new);
@@ -61,8 +61,8 @@ public class PessoaService {
 		this.pessoaRepository.delete(pessoa);
 	}
 
-	private PessoaRetornoDTO toDTO(Pessoa pessoa) {
-		PessoaRetornoDTO dto = new PessoaRetornoDTO();
+	private PessoaRetornoDtoV1 toDTO(Pessoa pessoa) {
+		PessoaRetornoDtoV1 dto = new PessoaRetornoDtoV1();
 
 		dto.setId(pessoa.getId());
 		dto.setNome(pessoa.getNome());
@@ -78,13 +78,13 @@ public class PessoaService {
 		return dto;
 	}
 
-	private Pessoa toEntity(PessoaCadastroDTO dto) {
+	private Pessoa toEntity(PessoaCadastroDtoV1 dto) {
 		Pessoa pessoa = new Pessoa();
 
 		return updateFromDTO(pessoa, dto);
 	}
 
-	private Pessoa updateFromDTO(Pessoa pessoa, PessoaCadastroDTO dto) {
+	private Pessoa updateFromDTO(Pessoa pessoa, PessoaCadastroDtoV1 dto) {
 		pessoa.setNome(dto.getNome());
 		pessoa.setSexo(dto.getSexo());
 		pessoa.setEmail(dto.getEmail());
