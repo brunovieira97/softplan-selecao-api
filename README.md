@@ -1,6 +1,8 @@
-# softplan-selecao-api
+# Softplan - Seleção Dev Java - API
 
-API do projeto de seleção para Desenvolvedor Java na Softplan.
+Este repositório contém o código da API REST (back-end) do desafio.
+
+Conforme as orientações, foi realizada a publicação da imagem Docker no DockerHub, acessível através [deste link](https://hub.docker.com/r/brunovieira97/softplan-selecao-api).
 
 ## Requisitos
 
@@ -19,5 +21,5 @@ API do projeto de seleção para Desenvolvedor Java na Softplan.
  - [x] Documentação executável (Swagger)
  - [ ] OAuth 2
  - [ ] Chat entre usuários
- - [ ] Versão 2 da API que obriga preenchimento do endereço da Pessoa (versão 1 deve continuar funcionando)
+ - [x] Versão 2 da API que obriga preenchimento do endereço da Pessoa (versão 1 deve continuar funcionando)
 
