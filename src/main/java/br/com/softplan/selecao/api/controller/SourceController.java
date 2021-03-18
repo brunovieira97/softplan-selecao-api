@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softplan.selecao.api.service.SourceService;
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/source")
@@ -18,6 +19,10 @@ public class SourceController {
 	
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
+	@Operation(
+		summary = "Buscar URL do repositório GitHub",
+		description = "Retorna a URL do repositório deste projeto no GitHub."
+	)
 	public String getProjectUrl() {
 		return this.sourceService.getProjectUrl();
 	}
