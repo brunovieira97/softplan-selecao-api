@@ -16,7 +16,7 @@ API do projeto de seleção para Desenvolvedor Java na Softplan.
  - [ ] Aplicação rodando em ambiente Cloud
  - [ ] Testes de Integração da API
  - [ ] API desenvolvida em REST, seguindo Modelo de Maturidade de Richardson ou GraphQL
- - [ ] Documentação executável (Swagger)
+ - [x] Documentação executável (Swagger)
  - [ ] OAuth 2
  - [ ] Chat entre usuários
  - [ ] Versão 2 da API que obriga preenchimento do endereço da Pessoa (versão 1 deve continuar funcionando)
